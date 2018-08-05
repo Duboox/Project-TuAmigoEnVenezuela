@@ -35,7 +35,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::paginate(10);
+        $invoices = Invoice::orderBy('created_at', 'desc')->paginate(10);
         return view('dashboard.invoices.index', compact('invoices'));
     }
     public function create()

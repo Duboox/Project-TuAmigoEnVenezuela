@@ -43,7 +43,7 @@
               <ul class="nav navbar-top-links navbar-right">
                  <li>
                     <span class="m-r-sm text-muted welcome-message">
-                      Bienvenido a {{ config('app.name') }} +Admin
+                      Bienvenido a {{ config('app.name') }}
                     </span>
                  </li>
                  <li>

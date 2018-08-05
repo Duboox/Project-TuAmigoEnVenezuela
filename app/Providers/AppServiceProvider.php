@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\User;
+use App\Client; // DB Model
+use App\Agent; // DB Model
+use App\Invoice; // DB Model
 
 class AppServiceProvider extends ServiceProvider
 {

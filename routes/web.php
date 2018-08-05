@@ -58,5 +58,4 @@ Route::prefix('dashboard')->middleware(['auth', 'disable.back'])->group(function
 	
 	// Roles
 	Route::resource('roles', 'Dashboard\RoleController');
-	
 });
