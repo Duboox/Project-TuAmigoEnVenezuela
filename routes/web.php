@@ -32,6 +32,27 @@ Route::prefix('dashboard')->middleware(['auth', 'disable.back'])->group(function
 	Route::post('users/pdf/report', 'Dashboard\UserController@userPDFreport')->name('user.pdf.report');
 	Route::resource('users', 'Dashboard\UserController');
 
+	// Clients
+	Route::get('clients/pdf', 'Dashboard\ClientController@ClientControllerPDFview')->name('client.pdf');
+	Route::get('all/clients/pdf', 'Dashboard\ClientController@AllClientControllerPDF')->name('all.client.pdf');
+	
+	Route::post('clients/pdf/report', 'Dashboard\ClientController@userPDFreport')->name('client.pdf.report');
+	Route::resource('clients', 'Dashboard\ClientController');
+
+	// Agents
+	Route::get('agents/pdf', 'Dashboard\AgentController@agentPDFview')->name('agent.pdf');
+	Route::get('all/agents/pdf', 'Dashboard\AgentController@AllagentPDF')->name('all.agent.pdf');
+	
+	Route::post('agents/pdf/report', 'Dashboard\AgentController@agentPDFreport')->name('agent.pdf.report');
+	Route::resource('agents', 'Dashboard\AgentController');
+
+	// Invoices
+	Route::get('invoices/pdf', 'Dashboard\InvoiceController@invoicePDFview')->name('invoice.pdf');
+	Route::get('all/invoices/pdf', 'Dashboard\InvoiceController@AllinvoicePDF')->name('all.invoice.pdf');
+	
+	Route::post('invoices/pdf/report', 'Dashboard\InvoiceController@invoicePDFreport')->name('invoice.pdf.report');
+	Route::resource('invoices', 'Dashboard\InvoiceController');
+
 	// Assigns
     Route::get('roles/assigns', 'Dashboard\RoleController@assigns')->name('assigns.index');
 	
