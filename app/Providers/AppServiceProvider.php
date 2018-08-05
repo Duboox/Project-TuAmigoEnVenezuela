@@ -30,6 +30,9 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             $view->with('user_count', User::count());
+            $view->with('client_count', Client::count());
+            $view->with('agent_count', Agent::count());
+            $view->with('invoice_count', Invoice::count());
         });
     }
 

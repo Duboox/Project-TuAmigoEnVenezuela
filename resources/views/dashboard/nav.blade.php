@@ -30,6 +30,27 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('clients.index') }}">
+                    <i class="fa fa-users"></i>
+                        <span class="nav-label">Clientes</span>
+                        <span class="label label-warning pull-right">{{ $client_count }}</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('agents.index') }}">
+                    <i class="fa fa-users"></i>
+                        <span class="nav-label">Agentes</span>
+                        <span class="label label-warning pull-right">{{ $agent_count }}</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('invoices.index') }}">
+                    <i class="fa fa-users"></i>
+                        <span class="nav-label">Facturas</span>
+                        <span class="label label-warning pull-right">{{ $invoice_count }}</span>
+                </a>
+            </li>
+            <li>
                 <a href="#">
                     <i class="fa fa-lock"></i> 
                     <span class="nav-label">Seguridad</span>
