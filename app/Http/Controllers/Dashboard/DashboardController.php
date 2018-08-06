@@ -68,11 +68,11 @@ class DashboardController extends Controller
         if (!is_null($file)) {
            $img = Image::make($file->getRealPath())->resize(130, 130);
 
-           $filename = str_random(20).'_'.md5($file->getClientOriginalName());
+           $filename = str_random(20).'_'.md5($file->getClientOriginalName()).'.jpg';
 
            $id->update(['avatar' => $filename]);
 
-           Storage::disk('avatars')->put($filename, $img->encode());
+           Storage::disk('avatars')->put($filename, $img->encode('jpg', 75));
 
            Storage::disk('avatars')->delete($request->old_avatar); 
 

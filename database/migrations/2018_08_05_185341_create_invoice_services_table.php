@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvoicesTable extends Migration
+class CreateInvoiceServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,23 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('invoice_services', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('id_client');
-            $table->string('id_agent');
-            $table->date('exit_date');
-            $table->date('arrival_date');
-            $table->integer('price');
             $table->timestamps();
             $table->softDeletes();
+
             // Relations
-            $table->integer('id_ticket_type')->unsigned();
-            $table->foreign('id_ticket_type')
+            $table->integer('id_invoice')->unsigned();
+            $table->foreign('id_invoice')
                     ->references('id')
-                    ->on('ticket_types')
+                    ->on('invoices')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->integer('id_service')->unsigned();
+            $table->foreign('id_service')
+                    ->references('id')
+                    ->on('services')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 
@@ -46,6 +49,6 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('invoice_services');
     }
 }

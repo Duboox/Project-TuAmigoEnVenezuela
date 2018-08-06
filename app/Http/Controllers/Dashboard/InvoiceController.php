@@ -35,7 +35,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::orderBy('created_at', 'desc')->paginate(10);
+        $invoices = Invoice::with('client', 'agent', 'ticket_type', 'invoice_service.service')->orderBy('created_at', 'desc')->paginate(10);
+       
         return view('dashboard.invoices.index', compact('invoices'));
     }
     public function create()
@@ -48,7 +49,6 @@ class InvoiceController extends Controller
         $newInvoice = ([
             'id_client' => $request->id_client,
             'id_agent' => $request->id_agent, 
-            'type' => $request->type, 
             'ticket_type' => $request->ticket_type, 
             'exit_date' => $request->exit_date, 
             'arrival_date' => $request->arrival_date,  
