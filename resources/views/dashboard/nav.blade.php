@@ -56,6 +56,13 @@
                                 <span class="label label-warning pull-right">{{ $invoice_count }}</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('services.index') }}">
+                            <i class="fa fa-users"></i>
+                                <span class="nav-label">Servicios</span>
+                                <span class="label label-warning pull-right">{{ $service_count }}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li>

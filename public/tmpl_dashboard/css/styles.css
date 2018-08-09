@@ -1,6 +1,10 @@
 /*================================
 =      Dashboard   > Perfil      =
 ==================================*/
+.img-logo-login{
+    width: 300px;
+}
+
 .user-avatar {
     height: auto;
     width: 50px;

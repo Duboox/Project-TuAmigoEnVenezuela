@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use PDF;
 use App\Invoice;
+use App\Client;
+use App\Agent;
+use App\Service;
+use App\Ticket_type;
 class InvoiceController extends Controller
 {
     /**
@@ -35,7 +39,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::with('client', 'agent', 'ticket_type', 'invoice_service.service')->orderBy('created_at', 'desc')->paginate(10);
+        $invoices = Invoice::with('client', 'agent', 'invoice_service.service')->orderBy('created_at', 'desc')->paginate(10);
        
         return view('dashboard.invoices.index', compact('invoices'));
     }
@@ -69,7 +73,11 @@ class InvoiceController extends Controller
     public function edit($id)
     {
         $invoice = Invoice::find($id);
-        return view('dashboard.invoices.edit', compact('invoice'));
+        $clients = Client::all(['id', 'name']);
+        $agents = Agent::all(['id', 'name']);
+        $ticket_types = Ticket_type::all(['id', 'name']);
+        $services = Service::all(['id', 'name']);
+        return view('dashboard.invoices.edit', compact('invoice', 'clients', 'agents', 'ticket_types', 'services'));
     }
     /**
      * Update the specified resource in storage.

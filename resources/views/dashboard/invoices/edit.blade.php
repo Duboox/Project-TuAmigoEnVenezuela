@@ -1,15 +1,15 @@
 @extends('layouts.dashboard')
-@section('title', 'Agente: '.$agent->name)
+@section('title', 'Factura Para: '.$invoice->client->name)
 @section('content')
 <div class="row wrapper border-bottom white-bg page-heading">
    <div class="col-lg-10">
-      <h2>Agente {{ $agent->name }}</h2>
+      <h2>Factura Para {{ $invoice->client->name }}</h2>
       <ol class="breadcrumb">
          <li>
             <a href="{{ route('home') }}">Inicio</a>
          </li>
          <li>
-            <a href="{{ route('agents.index') }}">Agentes</a>
+            <a href="{{ route('invoices.index') }}">Facturas</a>
          </li>
          <li class="active">
             <a href="#">
@@ -27,70 +27,61 @@
                <h5>Requeridos (*)</h5>
             </div>
             <div class="ibox-content">
-               {{ Form::model($agent, ['route' => ['agents.update', $agent->id], 'method' => 'PUT']) }}
+               {{ Form::model($invoice, ['route' => ['invoices.update', $invoice->id], 'method' => 'PUT']) }}
                <div class="ibox-content">
                   <div class="row">
                      <div class="col-sm-12 b-r">
-                        <div class="form-group">
-                           <label>Nombre: (*)</label> 
-                           {{ Form::text('name', $agent->name, ['class' => 'form-control']) }}
-                           @if ($errors->has('name'))
-                             <span class="error-validate">
-                                <strong>{{ $errors->first('name') }}</strong>
-                             </span>
-                           @endif
+                     <div class="form-group">
+                          <label>Cliente: (*)</label> 
+                          {!! Form::select('id_client', json_decode($clients->pluck('name', 'id'), true), $invoice->client->id, ['class' => 'form-control', 'id' => 'name']) !!}
+                          @if ($errors->has('id_client'))
+                            <span class="error-validate">
+                               <strong>{{ $errors->first('id_client') }}</strong>
+                            </span>
+                          @endif
                         </div>
                         <div class="form-group">
-                            <label>Apellido: (*)</label> 
-                            {{ Form::text('last_name', $agent->last_name, ['class' => 'form-control']) }}
-                            @if ($errors->has('last_name'))
+                          <label>Agente: (*)</label> 
+                          {!! Form::select('id_agent', json_decode($agents->pluck('name', 'id'), true), $invoice->agent->id, ['class' => 'form-control', 'id' => 'name']) !!}
+                          @if ($errors->has('id_agent'))
+                            <span class="error-validate">
+                               <strong>{{ $errors->first('id_agent') }}</strong>
+                            </span>
+                          @endif
+                        </div>
+                        <div class="form-group">
+                          <label>Tipo de boleto: (*)</label> 
+                          {!! Form::select('id_ticket_type', json_decode($ticket_types->pluck('name', 'id'), true), $invoice->ticket_type->id, ['class' => 'form-control', 'id' => 'name']) !!}
+                          @if ($errors->has('id_ticket_type'))
+                            <span class="error-validate">
+                               <strong>{{ $errors->first('id_ticket_type') }}</strong>
+                            </span>
+                          @endif
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha de salida: (*)</label> 
+                            {{ Form::date('exit_date', $invoice->exit_date, ['class' => 'form-control']) }}
+                            @if ($errors->has('exit_date'))
                               <span class="error-validate">
-                                 <strong>{{ $errors->first('last_name') }}</strong>
+                                 <strong>{{ $errors->first('exit_date') }}</strong>
                               </span>
                             @endif
                          </div>
                          <div class="form-group">
-                           <label>Correo Eléctronico: (*)</label> 
-                           {{ Form::text('email', $agent->email, ['class' => 'form-control']) }}
-                           @if ($errors->has('email'))
-                             <span class="error-validate">
-                                <strong>{{ $errors->first('email') }}</strong>
-                             </span>
-                           @endif
-                         </div>
-                         <div class="form-group">
-                            <label>Telefono: (*)</label> 
-                            {{ Form::text('phone', $agent->phone, ['class' => 'form-control']) }}
-                            @if ($errors->has('phone'))
+                            <label>Fecha de llegada: (*)</label> 
+                            {{ Form::date('arrival_date', $invoice->arrival_date, ['class' => 'form-control']) }}
+                            @if ($errors->has('arrival_date'))
                               <span class="error-validate">
-                                 <strong>{{ $errors->first('phone') }}</strong>
+                                 <strong>{{ $errors->first('arrival_date') }}</strong>
                               </span>
                             @endif
                          </div>
                          <div class="form-group">
-                            <label>Fecha de nacimiento: (*)</label> 
-                            {{ Form::date('birthday_date', $agent->birthday_date, ['class' => 'form-control']) }}
-                            @if ($errors->has('birthday_date'))
+                            <label>Precio: </label> 
+                            {{ Form::number('price', $invoice->price, ['class' => 'form-control']) }}
+                            @if ($errors->has('price'))
                               <span class="error-validate">
-                                 <strong>{{ $errors->first('birthday_date') }}</strong>
-                              </span>
-                            @endif
-                         </div>
-                         <div class="form-group">
-                            <label>Rating: </label> 
-                            {{ Form::number('rating', $agent->rating, ['class' => 'form-control']) }}
-                            @if ($errors->has('rating'))
-                              <span class="error-validate">
-                                 <strong>{{ $errors->first('rating') }}</strong>
-                              </span>
-                            @endif
-                         </div>
-                         <div class="form-group">
-                            <label>Otro: </label> 
-                            {{ Form::text('option', $agent->option, ['class' => 'form-control']) }}
-                            @if ($errors->has('option'))
-                              <span class="error-validate">
-                                 <strong>{{ $errors->first('option') }}</strong>
+                                 <strong>{{ $errors->first('price') }}</strong>
                               </span>
                             @endif
                          </div>

@@ -8,6 +8,7 @@ use App\User;
 use App\Client; // DB Model
 use App\Agent; // DB Model
 use App\Invoice; // DB Model
+use App\Service; // DB Model
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('client_count', Client::count());
             $view->with('agent_count', Agent::count());
             $view->with('invoice_count', Invoice::count());
+            $view->with('service_count', Service::count());
         });
     }
 

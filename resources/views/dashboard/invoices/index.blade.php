@@ -37,7 +37,6 @@
                         <th>#ID</th>
                         <th>Cliente</th>
                         <th>Agente</th>
-                        <th>Tipo de boleto</th>
                         <th>Servicios</th>
                         <th>Fecha de salida</th>
                         <th>Fecha de llegada</th>
@@ -53,7 +52,6 @@
                       <td>{{ $invoice->id }}</td>
                       <td>{{ $invoice->client->name }}</td>
                       <td>{{ $invoice->agent->name }}</td>
-                      <td>{{ $invoice->ticket_type->name }}</td>
                       <td>
                       @foreach($invoice->invoice_service as $service)
                         <span>{{ $service->service->name }}</span>

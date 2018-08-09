@@ -53,6 +53,13 @@ Route::prefix('dashboard')->middleware(['auth', 'disable.back'])->group(function
 	Route::post('invoices/pdf/report', 'Dashboard\InvoiceController@invoicePDFreport')->name('invoice.pdf.report');
 	Route::resource('invoices', 'Dashboard\InvoiceController');
 
+	// Services
+	Route::get('services/pdf', 'Dashboard\ServiceController@servicePDFview')->name('service.pdf');
+	Route::get('all/services/pdf', 'Dashboard\ServiceController@AllservicePDF')->name('all.service.pdf');
+	
+	Route::post('services/pdf/report', 'Dashboard\ServiceController@servicePDFreport')->name('service.pdf.report');
+	Route::resource('services', 'Dashboard\ServiceController');
+
 	// Assigns
     Route::get('roles/assigns', 'Dashboard\RoleController@assigns')->name('assigns.index');
 	
