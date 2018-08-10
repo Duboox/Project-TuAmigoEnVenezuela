@@ -77,6 +77,13 @@
 
     {{ js_plugin('metisMenu', 'jquery.metisMenu') }}
     {{ js_plugin('slimscroll', 'jquery.slimscroll.min') }}
+
+    <!-- Multi-Select Bootrap -->
+    {{ js_plugin('bootstrap-multiselect', 'bootstrap-multiselect') }}
+
+    <!-- Template -->
+    {{ js('template') }}
+    {{ js('template-dashboard') }}
     
     <!-- Flot -->
     {{ js_plugin('flot', 'jquery.flot') }}
@@ -102,18 +109,12 @@
     
     <!-- Sparkline -->
     {{ js_plugin('sparkline', 'jquery.sparkline.min') }}
-
-    <!-- Multi-Select Bootrap -->
-    {{ js_plugin('bootstrap-multiselect', 'bootstrap-multiselect') }}
     
     <!-- Sparkline demo data  -->
     {{ js('demo/sparkline-demo') }}
     
     <!-- Toastr -->
     {{ js_plugin('toastr', 'toastr.min') }}
-
-    {{ js('template') }}
-    {{ js('template-dashboard') }}
     @show
     @yield('script')
 </body>
