@@ -9,6 +9,9 @@ $(document).ready(function() {
 	$("a[rel='pop-up']").click(function () {
       	window.open(this.href, 'Popup', 'height = 600 , width = 1200, left = 100');
       	return false;
- 	});
+	 });
+
+	 //Multi-Select
+		$('#multi-select-custom').multiselect();
 });
 

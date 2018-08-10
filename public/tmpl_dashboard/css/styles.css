@@ -1,6 +1,11 @@
-/*================================
-=      Dashboard   > Perfil      =
-==================================*/
+/* #multi-select-custom .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+    background-color: #16987e !important;
+}
+#multi-select-custom .dropdown-menu>.active>a {
+    background: #16987e !important;
+} */
+
+/* Logo in start */
 .img-logo-login{
     width: 300px;
 }

@@ -14,6 +14,8 @@
     @section('styles')
     {{ css('bootstrap.min') }}
     {{ Html::style('tmpl_dashboard/font-awesome/css/font-awesome.css') }}
+
+    {{ Html::style('tmpl_dashboard//css/plugins/bootstrap-multiselect/bootstrap-multiselect.css') }}
     <!-- Toastr style -->
     {{ css_plugin('toastr', 'toastr.min') }}
     {{ css('animate') }}
@@ -100,6 +102,9 @@
     
     <!-- Sparkline -->
     {{ js_plugin('sparkline', 'jquery.sparkline.min') }}
+
+    <!-- Multi-Select Bootrap -->
+    {{ js_plugin('bootstrap-multiselect', 'bootstrap-multiselect') }}
     
     <!-- Sparkline demo data  -->
     {{ js('demo/sparkline-demo') }}

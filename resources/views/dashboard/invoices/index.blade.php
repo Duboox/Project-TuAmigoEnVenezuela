@@ -64,6 +64,13 @@
                       <td>{{ $invoice->arrival_date }}</td>
                       <td>{{ $invoice->price }}</td>
                       <td>{{ $invoice->created_at->diffForHumans() }}</td>
+                      @can('invoices.show')
+                      <td width="10px">
+                          <a href="{{ route('invoices.show', $invoice->id) }}" class="btn btn-sm btn-info">
+                              Ver
+                          </a>
+                      </td>
+                      @endcan
                       @can('invoices.edit')
                       <td width="10px">
                           <a href="{{ route('invoices.edit', $invoice->id) }}" class="btn btn-sm btn-info">

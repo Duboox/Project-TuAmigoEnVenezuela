@@ -50,11 +50,11 @@
                           @endif
                         </div>
                         <div class="form-group">
-                          <label>Tipo de boleto: (*)</label> 
-                          {!! Form::select('id_ticket_type', json_decode($ticket_types->pluck('name', 'id'), true), $invoice->ticket_type->id, ['class' => 'form-control', 'id' => 'name']) !!}
-                          @if ($errors->has('id_ticket_type'))
+                          <label style="display:block;">Servicios: (*)</label> 
+                          {!! Form::select('services[]', json_decode($services->pluck('name', 'id'), true), $invoice->invoice_service->pluck('id_service'), ['multiple'=>'multiple', 'class' => 'form-control', 'id' => 'multi-select-custom']) !!}
+                          @if ($errors->has('services'))
                             <span class="error-validate">
-                               <strong>{{ $errors->first('id_ticket_type') }}</strong>
+                               <strong>{{ $errors->first('services') }}</strong>
                             </span>
                           @endif
                         </div>
@@ -97,4 +97,9 @@
       </div>
    </div>
 </div>
+@endsection
+@section('script')
+<script>
+
+</script>
 @endsection

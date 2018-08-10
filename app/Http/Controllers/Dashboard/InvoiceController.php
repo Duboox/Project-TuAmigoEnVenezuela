@@ -11,7 +11,7 @@ use App\Invoice;
 use App\Client;
 use App\Agent;
 use App\Service;
-use App\Ticket_type;
+use App\Invoice_service;
 class InvoiceController extends Controller
 {
     /**
@@ -72,12 +72,11 @@ class InvoiceController extends Controller
      */
     public function edit($id)
     {
-        $invoice = Invoice::find($id);
+        $invoice = Invoice::with('invoice_service')->findOrFail($id);
         $clients = Client::all(['id', 'name']);
         $agents = Agent::all(['id', 'name']);
-        $ticket_types = Ticket_type::all(['id', 'name']);
         $services = Service::all(['id', 'name']);
-        return view('dashboard.invoices.edit', compact('invoice', 'clients', 'agents', 'ticket_types', 'services'));
+        return view('dashboard.invoices.edit', compact('invoice', 'clients', 'agents', 'services'));
     }
     /**
      * Update the specified resource in storage.
@@ -88,16 +87,44 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $invoice = Invoice::find($id);
+        $invoice = Invoice::findOrFail($id);
+        $data = $request->except('services');
+
+        $items = [];
+        $itemsIds = [];
+        foreach ($request->services as $item) {
+            $Service = Service::findOrFail($item);
+            if (! Invoice_service::where('id_service', '=', $Service->id)
+            ->where('id_invoice', '=', $invoice->id)->exists()) {
+                $saveItem['id_invoice'] = $invoice->id;
+                $saveItem['id_service'] = $item;
+                $saveItem['id_user'] = Auth::user()->id;
+                $items[] = new Invoice_service($saveItem);
+             }
+             $itemsIds[] = $item;
+        }
+
+        // Delete removed items
+        if(count($itemsIds)) {
+            Invoice_service::where('id_invoice', '=', $invoice->id)
+                ->whereNotIn('id_service', $itemsIds)
+                ->delete();
+        }
+        if(count($items)) {
+            $invoice->invoice_service()
+                ->saveMany($items);
+        }
+
         $invoice->update([
             'id_client' => $request->id_client,
             'id_agent' => $request->id_agent, 
-            'type' => $request->type, 
-            'ticket_type' => $request->ticket_type, 
             'exit_date' => $request->exit_date, 
             'arrival_date' => $request->arrival_date,  
-            'price' => $request->price,  
-            ]);
+            'price' => $request->price,
+            'id_user' => Auth::user()->id
+        ]);
+        
+            //return $request;
         return save_response($invoice, 'invoices.index', 
             'Factura actualizada éxitosamente!!!'
         ); 
