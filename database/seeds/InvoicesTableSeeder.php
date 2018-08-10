@@ -17,11 +17,20 @@ class InvoicesTableSeeder extends Seeder
         $faker = Factory::create(); // Create a instance of the faker/factory
         foreach (range(1, 5) as $i) {
             $invoice = Invoice::create([
+                'correlative' => 'TAV2018-'.mt_rand(1, 12),
                 'id_client' => App\Client::all()->random()->id,
                 'id_agent' => App\Agent::all()->random()->id,
-                'id_ticket_type' => App\Ticket_type::all()->random()->id,
+                'luggage' => mt_rand(1, 23),
+                'hand_luggage' => mt_rand(1, 10),
+                'origin' => $faker->city,
+                'destination' => $faker->city,
+                'adults' => mt_rand(1, 5),
+                'kids' => mt_rand(1, 5),
+                'bebys' => mt_rand(1, 5),
                 'exit_date' => '2018-'.mt_rand(1, 12).'-'.mt_rand(1, 28), // Math Random
+                'exit_time' => mt_rand(1, 24).':'.mt_rand(1, 59), // Math Random
                 'arrival_date' => '2018-'.mt_rand(1, 12).'-'.mt_rand(1, 28), // Math Random
+                'exit_rate' => mt_rand(1, 1000),
                 'price' => mt_rand(1, 10000),
                 'id_user' => App\User::all()->random()->id,
             ]);

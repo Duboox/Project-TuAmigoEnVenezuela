@@ -50,6 +50,69 @@
                           @endif
                         </div>
                         <div class="form-group">
+                            <label>Equipaje: </label> 
+                            {{ Form::number('luggage', $invoice->luggage, ['class' => 'form-control']) }}
+                            @if ($errors->has('luggage'))
+                              <span class="error-validate">
+                                 <strong>{{ $errors->first('luggage') }}</strong>
+                              </span>
+                            @endif
+                         </div>
+                         <div class="form-group">
+                            <label>Equipaje de mano: </label> 
+                            {{ Form::number('hand_luggage', $invoice->hand_luggage, ['class' => 'form-control']) }}
+                            @if ($errors->has('hand_luggage'))
+                              <span class="error-validate">
+                                 <strong>{{ $errors->first('hand_luggage') }}</strong>
+                              </span>
+                            @endif
+                         </div>
+                         <div class="form-group">
+                            <label>Origen: </label> 
+                            {{ Form::text('origin', $invoice->origin, ['class' => 'form-control']) }}
+                            @if ($errors->has('origin'))
+                              <span class="error-validate">
+                                 <strong>{{ $errors->first('origin') }}</strong>
+                              </span>
+                            @endif
+                         </div>
+                         <div class="form-group">
+                            <label>Destino: </label> 
+                            {{ Form::text('destination', $invoice->destination, ['class' => 'form-control']) }}
+                            @if ($errors->has('destination'))
+                              <span class="error-validate">
+                                 <strong>{{ $errors->first('destination') }}</strong>
+                              </span>
+                            @endif
+                         </div>
+                         <div class="form-group">
+                            <label>Adultos: </label> 
+                            {{ Form::number('adults', $invoice->adults, ['class' => 'form-control']) }}
+                            @if ($errors->has('adults'))
+                              <span class="error-validate">
+                                 <strong>{{ $errors->first('adults') }}</strong>
+                              </span>
+                            @endif
+                         </div>
+                         <div class="form-group">
+                            <label>Niños: </label> 
+                            {{ Form::number('kids', $invoice->kids, ['class' => 'form-control']) }}
+                            @if ($errors->has('kids'))
+                              <span class="error-validate">
+                                 <strong>{{ $errors->first('kids') }}</strong>
+                              </span>
+                            @endif
+                         </div>
+                         <div class="form-group">
+                            <label>Bebes: </label> 
+                            {{ Form::number('bebys', $invoice->bebys, ['class' => 'form-control']) }}
+                            @if ($errors->has('bebys'))
+                              <span class="error-validate">
+                                 <strong>{{ $errors->first('bebys') }}</strong>
+                              </span>
+                            @endif
+                         </div>
+                        <div class="form-group">
                           <label style="display:block;">Servicios: (*)</label> 
                           {!! Form::select('services[]', json_decode($services->pluck('name', 'id'), true), $invoice->invoice_service->pluck('id_service'), ['multiple'=>'multiple', 'class' => 'form-control', 'id' => 'multi-select-custom']) !!}
                           @if ($errors->has('services'))
@@ -68,11 +131,29 @@
                             @endif
                          </div>
                          <div class="form-group">
+                            <label>Hora de salida: </label> 
+                            {{ Form::text('exit_time', $invoice->exit_time, ['class' => 'form-control']) }}
+                            @if ($errors->has('exit_time'))
+                              <span class="error-validate">
+                                 <strong>{{ $errors->first('exit_time') }}</strong>
+                              </span>
+                            @endif
+                         </div>
+                         <div class="form-group">
                             <label>Fecha de llegada: (*)</label> 
                             {{ Form::date('arrival_date', $invoice->arrival_date, ['class' => 'form-control']) }}
                             @if ($errors->has('arrival_date'))
                               <span class="error-validate">
                                  <strong>{{ $errors->first('arrival_date') }}</strong>
+                              </span>
+                            @endif
+                         </div>
+                         <div class="form-group">
+                            <label>Tasa de salida: </label> 
+                            {{ Form::number('exit_rate', $invoice->exit_rate, ['class' => 'form-control']) }}
+                            @if ($errors->has('exit_rate'))
+                              <span class="error-validate">
+                                 <strong>{{ $errors->first('exit_rate') }}</strong>
                               </span>
                             @endif
                          </div>

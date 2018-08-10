@@ -45,21 +45,60 @@ class InvoiceController extends Controller
     }
     public function create()
     {
-        $invoices = Invoice::get();
-        return view('dashboard.invoices.create', compact('invoices'));
+        $clients = Client::all(['id', 'name']);
+        $agents = Agent::all(['id', 'name']);
+        $services = Service::all(['id', 'name']);
+        return view('dashboard.invoices.create', compact('clients', 'agents', 'services'));
     }
     public function store(Request $request)
     {
         $newInvoice = ([
+            'correlative' => 'TAV2018-'.$invoice->id,
             'id_client' => $request->id_client,
             'id_agent' => $request->id_agent, 
-            'ticket_type' => $request->ticket_type, 
+            'luggage' => $request->luggage, 
+            'hand_luggage' => $request->hand_luggage, 
+            'origin' => $request->origin, 
+            'destination' => $request->destination, 
+            'adults' => $request->adults, 
+            'kids' => $request->kids, 
+            'bebys' => $request->bebys, 
             'exit_date' => $request->exit_date, 
+            'exit_time' => $request->exit_time, 
             'arrival_date' => $request->arrival_date,  
-            'price' => $request->price,  
+            'exit_rate' => $request->exit_rate, 
+            'price' => $request->price,
             'id_user' => Auth::user()->id
-            ]);
+        ]);
+
         $invoice = Invoice::create($newInvoice);
+
+        $data = $request->except('services');
+
+        $items = [];
+        $itemsIds = [];
+        foreach ($request->services as $item) {
+            $Service = Service::findOrFail($item);
+            if (! Invoice_service::where('id_service', '=', $Service->id)
+            ->where('id_invoice', '=', $invoice->id)->exists()) {
+                $saveItem['id_invoice'] = $invoice->id;
+                $saveItem['id_service'] = $item;
+                $saveItem['id_user'] = Auth::user()->id;
+                $items[] = new Invoice_service($saveItem);
+             }
+             $itemsIds[] = $item;
+        }
+
+        // Delete removed items
+        if(count($itemsIds)) {
+            Invoice_service::where('id_invoice', '=', $invoice->id)
+                ->whereNotIn('id_service', $itemsIds)
+                ->delete();
+        }
+        if(count($items)) {
+            $invoice->invoice_service()
+                ->saveMany($items);
+        }
         return save_response($invoice, 'invoices.index', 
             'Factura creada éxitosamente!!!'
         ); 
@@ -116,10 +155,20 @@ class InvoiceController extends Controller
         }
 
         $invoice->update([
+            'correlative' => 'TAV2018-'.$invoice->id,
             'id_client' => $request->id_client,
             'id_agent' => $request->id_agent, 
+            'luggage' => $request->luggage, 
+            'hand_luggage' => $request->hand_luggage, 
+            'origin' => $request->origin, 
+            'destination' => $request->destination, 
+            'adults' => $request->adults, 
+            'kids' => $request->kids, 
+            'bebys' => $request->bebys, 
             'exit_date' => $request->exit_date, 
+            'exit_time' => $request->exit_time, 
             'arrival_date' => $request->arrival_date,  
+            'exit_rate' => $request->exit_rate, 
             'price' => $request->price,
             'id_user' => Auth::user()->id
         ]);

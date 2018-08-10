@@ -35,9 +35,15 @@
                   <thead>
                      <tr>
                         <th>#ID</th>
+                        <th>Correlativo</th>
                         <th>Cliente</th>
                         <th>Agente</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
                         <th>Servicios</th>
+                        <th>Adultos</th>
+                        <th>Niños</th>
+                        <th>Bebes</th>
                         <th>Fecha de salida</th>
                         <th>Fecha de llegada</th>
                         <th>Precio</th>
@@ -50,8 +56,11 @@
                   @foreach($invoices as $invoice)
                     <tr>
                       <td>{{ $invoice->id }}</td>
+                      <td>{{ $invoice->correlative }}</td>
                       <td>{{ $invoice->client->name }}</td>
                       <td>{{ $invoice->agent->name }}</td>
+                      <td>{{ $invoice->origin }}</td>
+                      <td>{{ $invoice->destination }}</td>
                       <td>
                       @foreach($invoice->invoice_service as $service)
                         <span>{{ $service->service->name }}</span>
@@ -60,6 +69,9 @@
                         @endif
                       @endforeach
                       </td>
+                      <td>{{ $invoice->adults }}</td>
+                      <td>{{ $invoice->kids }}</td>
+                      <td>{{ $invoice->bebys }}</td>
                       <td>{{ $invoice->exit_date }}</td>
                       <td>{{ $invoice->arrival_date }}</td>
                       <td>{{ $invoice->price }}</td>

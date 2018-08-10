@@ -15,21 +15,25 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('correlative');
             $table->string('id_client');
             $table->string('id_agent');
+            $table->integer('luggage');
+            $table->integer('hand_luggage');
+            $table->string('origin');
+            $table->string('destination');
+            $table->integer('adults');
+            $table->integer('kids');
+            $table->integer('bebys');
             $table->date('exit_date');
+            $table->string('exit_time');
             $table->date('arrival_date');
+            $table->integer('exit_rate');
             $table->integer('price');
             $table->timestamps();
             $table->softDeletes();
-            // Relations
-            $table->integer('id_ticket_type')->unsigned();
-            $table->foreign('id_ticket_type')
-                    ->references('id')
-                    ->on('ticket_types')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
 
+            // Relations
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')
                     ->references('id')
