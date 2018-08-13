@@ -43,6 +43,22 @@ class InvoiceController extends Controller
        
         return view('dashboard.invoices.index', compact('invoices'));
     }
+
+    public function show(Request $request, $id)
+    {
+        $invoice = Invoice::with('client', 'agent', 'invoice_service.service')->find($id);
+        //return view('dashboard.services.pdf.service', compact('service'));
+        
+        $pdf = PDF::loadView('dashboard.services.pdf.invoice', compact('invoice'));
+        
+        $pdf->output();
+        
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf ->get_canvas();
+        $canvas->page_text(10, 750, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 12, [0, 0, 0]);
+        return $pdf->stream();
+    }
+
     public function create()
     {
         $clients = Client::all(['id', 'name']);
@@ -52,8 +68,10 @@ class InvoiceController extends Controller
     }
     public function store(Request $request)
     {
+        $lastInvoice = Invoice::orderBy('created_at', 'desc')->first();
+        $lastId = $lastInvoice->id + 1;
         $newInvoice = ([
-            'correlative' => 'TAV2018-'.$invoice->id,
+            'correlative' => 'TAV2018-'.$lastId,
             'id_client' => $request->id_client,
             'id_agent' => $request->id_agent, 
             'luggage' => $request->luggage, 

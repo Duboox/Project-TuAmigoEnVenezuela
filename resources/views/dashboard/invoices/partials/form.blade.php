@@ -18,7 +18,7 @@
 </div>
 <div class="form-group">
     {{ Form::label('luggage', 'Equipaje') }}
-    {{ Form::number('luggage', null, null, ['class' => 'form-control', 'id' => 'luggage']) }}
+    {{ Form::number('luggage', null, ['class' => 'form-control', 'id' => 'luggage']) }}
     @if ($errors->has('luggage'))
         <span class="error-validate">
             <strong>{{ $errors->first('luggage') }}</strong>
@@ -27,7 +27,7 @@
 </div>
 <div class="form-group">
     {{ Form::label('hand_luggage', 'Equipaje de mano') }}
-    {{ Form::number('hand_luggage', null, null, ['class' => 'form-control', 'id' => 'hand_luggage']) }}
+    {{ Form::number('hand_luggage', null, ['class' => 'form-control', 'id' => 'hand_luggage']) }}
     @if ($errors->has('hand_luggage'))
         <span class="error-validate">
             <strong>{{ $errors->first('hand_luggage') }}</strong>
@@ -36,7 +36,7 @@
 </div>
 <div class="form-group">
     {{ Form::label('origin', 'Origen') }}
-    {{ Form::text('origin', null, null, ['class' => 'form-control', 'id' => 'origin']) }}
+    {{ Form::text('origin', null, ['class' => 'form-control', 'id' => 'origin']) }}
     @if ($errors->has('origin'))
         <span class="error-validate">
             <strong>{{ $errors->first('origin') }}</strong>
@@ -44,8 +44,8 @@
       @endif
 </div>
 <div class="form-group">
-    {{ Form::label('destination', 'Origen') }}
-    {{ Form::text('destination', null, null, ['class' => 'form-control', 'id' => 'destination']) }}
+    {{ Form::label('destination', 'Destino') }}
+    {{ Form::text('destination', null, ['class' => 'form-control', 'id' => 'destination']) }}
     @if ($errors->has('destination'))
         <span class="error-validate">
             <strong>{{ $errors->first('destination') }}</strong>
@@ -54,7 +54,7 @@
 </div>
 <div class="form-group">
     {{ Form::label('adults', 'Adultos') }}
-    {{ Form::number('adults', null, null, ['class' => 'form-control', 'id' => 'adults']) }}
+    {{ Form::number('adults', null, ['class' => 'form-control', 'id' => 'adults']) }}
     @if ($errors->has('adults'))
         <span class="error-validate">
             <strong>{{ $errors->first('adults') }}</strong>
@@ -63,7 +63,7 @@
 </div>
 <div class="form-group">
     {{ Form::label('kids', 'Niños') }}
-    {{ Form::number('kids', null, null, ['class' => 'form-control', 'id' => 'kids']) }}
+    {{ Form::number('kids', null, ['class' => 'form-control', 'id' => 'kids']) }}
     @if ($errors->has('kids'))
         <span class="error-validate">
             <strong>{{ $errors->first('kids') }}</strong>
@@ -72,7 +72,7 @@
 </div>
 <div class="form-group">
     {{ Form::label('bebys', 'Bebes') }}
-    {{ Form::number('bebys', null, null, ['class' => 'form-control', 'id' => 'bebys']) }}
+    {{ Form::number('bebys', null, ['class' => 'form-control', 'id' => 'bebys']) }}
     @if ($errors->has('bebys'))
         <span class="error-validate">
             <strong>{{ $errors->first('bebys') }}</strong>
@@ -99,7 +99,7 @@
 </div>
 <div class="form-group">
     {{ Form::label('exit_time', 'Hora de salida') }}
-    {{ Form::text('exit_time', null, null, ['class' => 'form-control', 'id' => 'exit_time']) }}
+    {{ Form::text('exit_time', null, ['class' => 'form-control', 'id' => 'exit_time']) }}
     @if ($errors->has('exit_time'))
         <span class="error-validate">
             <strong>{{ $errors->first('exit_time') }}</strong>
